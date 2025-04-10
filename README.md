@@ -2,6 +2,9 @@
 
 -create  vite app
 -connect tailwind with it
+- Header
+- Login form
+- Sign Up form
 
 # feature
 -Login /Signup page
@@ -17,4 +20,4 @@
 
 - NetflixGpt
     - Serarch Bar
-    - Movie Suggestons          
+    - Movie Suggesto          
