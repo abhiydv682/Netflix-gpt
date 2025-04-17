@@ -3,11 +3,11 @@ import Header from './Header';
 import { checkValidaData } from '../utils/validate';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth } from "../utils/firebase";
-import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
+import { USER_AVATAR } from '../utils/constants';
 
 const Login = () => {
-  const navigate = useNavigate();
+
   const [isSignInForm, setIsSignInForm] = useState(true);
   const [errorMessage, setErrorMessage] = useState(null);
 
@@ -38,7 +38,7 @@ const Login = () => {
           //update user profile
           updateProfile(user, {
             displayName: name.current.value,
-            photoURL: "https://media.licdn.com/dms/image/v2/D5603AQFPPAJBvoK6Fw/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1727068987710?e=1750291200&v=beta&t=FoBVmet2U1Mt3JI4N0v1JxoVr1-nu1n3TUZqL-WTDEs",
+            photoURL:USER_AVATAR,
             // Profile updated!
 
           })
@@ -60,7 +60,7 @@ const Login = () => {
               setErrorMessage(error.message);
             });
 
-          console.log(user);
+         
           navigate("/browse");
 
         })
@@ -80,14 +80,14 @@ const Login = () => {
         .then((userCredential) => {
           // Signed in 
           const user = userCredential.user;
-          console.log(user);
-          navigate("/browse");
+         
         })
         .catch((error) => {
           const errorCode = error.code;
           const errorMessage = error.message;
           setErrorMessage(errorCode + "-" + errorMessage);
         });
+        
     }
 
 

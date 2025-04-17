@@ -1,13 +1,18 @@
 import React from 'react'
 import { signOut } from 'firebase/auth';
-import { useNavigate } from 'react-router-dom';
+import {  useNavigate } from 'react-router-dom';
 import { auth } from '../utils/firebase';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import {onAuthStateChanged} from 'firebase/auth';
+import {addUser, removeUser} from '../utils/userSlice'
+import { LOGO } from '../utils/constants';
 // import { getAuth } from 'firebase/auth';
-import user from '../utils/userSlice'
+
 
 
 const Header = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const user = useSelector(store => store.user);
 
@@ -16,13 +21,44 @@ const Header = () => {
     signOut(auth)
       .then(() => {
         // Sign-out successful.
-        navigate("/");
+       
       })
       .catch((error) => {
         // An error happened.
         navigate("/error");
+        
       });
   }
+
+  
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        const { uid, email, displayName, photoURL } = user;
+        dispatch(
+          addUser({
+            
+            uid: uid,
+            email: email,
+            displayName: displayName,
+            photoURL: photoURL,
+
+          })
+        );
+        navigate("/browse");
+
+      } else {
+        // User is signed out
+        dispatch(removeUser());
+        navigate("/");
+
+      }
+    });
+    //unsubscribe when component unmounted
+    return () => unsubscribe();
+
+  }, [])
+
 
   return (
 
@@ -31,7 +67,7 @@ const Header = () => {
 
       <img
         className='w-44'
-        src="https://help.nflxext.com/helpcenter/OneTrust/oneTrust_production/consent/87b6a5c0-0104-4e96-a291-092c11350111/01938dc4-59b3-7bbc-b635-c4131030e85f/logos/dd6b162f-1a32-456a-9cfe-897231c7763c/4345ea78-053c-46d2-b11e-09adaef973dc/Netflix_Logo_PMS.png"
+        src={LOGO}
         alt='logo'
       />
 
@@ -41,17 +77,24 @@ const Header = () => {
           <img
             className='w-12 h-12 '
             alt="usericon"
-            src={user?.photoUrl}
+            src={user?.photoURL}
+            // src={user?.photoUrl || 'https://upload.wikimedia.org/wikipedia/commons/0/0b/Netflix-avatar.png'}
+          
           // src='https://upload.wikimedia.org/wikipedia/commons/0/0b/Netflix-avatar.png'
 
           />
+          
+         
           <button onClick={handleSignOut} className="font-bold text-white">(Sign Out)</button>
         </div>
+        
+      
       )}
-
+      
 
 
     </div>
+    
   )
 }
 
