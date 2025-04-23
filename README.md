@@ -27,6 +27,13 @@
 - Update Store with Trailer Video Data
 - Embedded the Youtube viedo make it autoplay and mute
 - And add tailwind css for amazing looks
+- build Secondary Component
+- Build Movies List
+- Build Movie Card
+- TMBD Image CDn Url
+- Made the Browser Page imazingf With Tailwind css
+- usePopularMovies Custom, Hook
+
 
 # feature
 -Login /Signup page
