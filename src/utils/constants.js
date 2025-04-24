@@ -14,3 +14,11 @@ export const API_OPTIONS = {
 
 
   export const IMG_CDN_URL = 'https://image.tmdb.org/t/p/w500';
+
+  export const BG_URL = 'https://d3o2718znwp36h.cloudfront.net/prod/uploads/2023/01/netflix-web.jpg';
+
+  export const SUPPORTED_LANGUAGES = [
+    {identifier: "en", name: "English"},
+    {identifier: "hindi", name: "Hindi"},
+    {identifier: "spanish", name: "Spanish"}
+  ]

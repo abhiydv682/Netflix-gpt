@@ -4,7 +4,7 @@ import { checkValidaData } from '../utils/validate';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth } from "../utils/firebase";
 import { useDispatch } from 'react-redux';
-import { USER_AVATAR } from '../utils/constants';
+import { BG_URL, USER_AVATAR } from '../utils/constants';
 
 const Login = () => {
 
@@ -106,7 +106,7 @@ const Login = () => {
 
       <div className='absolute'>
         <img
-          src='https://d3o2718znwp36h.cloudfront.net/prod/uploads/2023/01/netflix-web.jpg'
+          src={BG_URL}
         />
       </div>
 

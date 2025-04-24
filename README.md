@@ -33,6 +33,10 @@
 - TMBD Image CDn Url
 - Made the Browser Page imazingf With Tailwind css
 - usePopularMovies Custom, Hook
+- gpt search page
+- GPT search BAr
+- Multilanguiage feature in our App
+
 
 
 # feature
